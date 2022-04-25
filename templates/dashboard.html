@@ -1,0 +1,66 @@
+{% extends 'index.html'%}
+
+{% block body %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+    >
+      <h1 class="h2">Dashboard</h1>
+    </div>
+
+    <div id="Loader">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col-lg-3 lg-6">
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <i class="feather-64" data-feather="user-plus"></i>
+            <h5 class="card-title">Tambah User</h5>
+            <p class="card-text">.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 lg-6">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <i class="feather-64" data-feather="users"></i>
+            <h5 class="card-title">Users</h5>
+            <p class="card-text">.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 lg-6">
+        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <i class="feather-64" data-feather="thumbs-down"></i>
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 lg-6">
+        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <i class="feather-64" data-feather="smile"></i>
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <canvas
+      class="my-4 w-100"
+      id="myChart"
+      width="900"
+      height="380"
+    ></canvas>
+  </main>
+  {% endblock %}
