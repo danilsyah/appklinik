@@ -13,3 +13,4 @@ Aplikasi Klinik Berbasis Web menggunakan Flask Python
     - pip install PyMySQL / pip install mysqldb
     - pip install mysqlclient
     - pip install SQLAlchemy
+    - pip install flask_bootstrap

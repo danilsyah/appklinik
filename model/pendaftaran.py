@@ -12,6 +12,7 @@ class Pendaftaran(db.Model):
     profesi = db.Column(db.String(100))
     alamat = db.Column(db.Text)
     keterangan = db.Column(db.String(100))
+    db.relationship('Pasien', backref=db.backref('pendaftaran', lazy=True))
     
     def __init__(self, nama, tempat_lahir, tgl_lahir, jenis_kelamin, status, profesi, alamat, keterangan):
         self.nama = nama

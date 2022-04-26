@@ -9,6 +9,7 @@ class User(db.Model):
     username = db.Column(db.String(100))
     password = db.Column(db.Text)
     level = db.Column(db.String(100))
+    usernya = db.relationship('Pasien', backref=db.backref('user', lazy=True))
     
     def __init__(self, username, password, level):
         self.username = username
