@@ -1,0 +1,176 @@
+{% extends 'index.html'%}
+
+{% block body %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Data Users</h1>
+        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+        <div class="alert-message block-message error">
+            <a class="close" href="#">×</a>
+            <ul>
+                {%- for msg in errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{msg}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div id="Loader">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h5 class="card-header"><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalTambah" data-bs-whatever="@mdo"><span data-feather="plus"></span> Tambah
+                    User</button>
+                <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="{{url_for('tambahuser')}}" method="post">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">User Baru</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="username" class="col-form-label-sm">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" required
+                                            placeholder="input username..." />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="username" class="col-form-label-sm">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            required placeholder="input password..." />
+                                    </div>
+                                    <div class="md-3">
+                                        <label for="validationCustom04" class="col-form-label-sm">Level</label>
+                                        <select class="form-select" id="validationCustom04" name="level" required>
+                                            <option selected disabled value="">Pilih...</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Dokter">Dokter</option>
+                                            <option value="Administrasi">Administrasi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </h5>
+            <div class="card-body">
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dt in data%}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{dt.username}}</td>
+                            <td>{{dt.level}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalEdit{{dt.id}}" data-bs-whatever="@mdo"><span
+                                        data-feather="edit"></span> Edit</button>
+                                <div class="modal fade" id="modalEdit{{dt.id}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit User {{dt.username}}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/edituser/{{dt.id}}" method="POST">
+                                                    <div class="mb-3">
+                                                        <label for="username" class="col-form-label-sm">Username</label>
+                                                        <input type="text" class="form-control" id="username"
+                                                            name="username" value="{{dt.username}}" required placeholder="input username..." />
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="username" class="col-form-label-sm">Password</label>
+                                                        <input type="password" class="form-control" id="password"
+                                                            name="password" required placeholder="input password..." />
+                                                    </div>
+                                                    <div class="md-3">
+                                                        <label for="validationCustom04"
+                                                            class="col-form-label-sm">Level</label>
+                                                        <select class="form-select" id="validationCustom04" name="level"
+                                                            required>
+                                                            <option selected value="{{dt.level}}">{{dt.level}}</option>
+                                                            <option value="Admin">Admin</option>
+                                                            <option value="Dokter">Dokter</option>
+                                                            <option value="Administrasi">Administrasi</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#modalHapus{{dt.id}}" data-bs-whatever="@mdo"><span
+                                        data-feather="x-circle"></span> Hapus</button>
+                                        <div class="modal fade" id="modalHapus{{dt.id}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content"> 
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                   <h5>Apakah user ini yakin akan di hapus ?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <a href="/userhapus/{{dt.id}}" class="btn btn-primary">Yes</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

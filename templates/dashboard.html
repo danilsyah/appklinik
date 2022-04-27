@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    
+    {% if session.level == 'Admin' %}
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col-lg-3 lg-6">
         <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
@@ -63,4 +63,21 @@
       height="380"
     ></canvas>
   </main>
+  {% elif session.level == 'Dokter' %}
+  <main class="container">
+    <div class="bg-light p-5 rounded">
+      <h1>Dashboard Dokter</h1>
+      <p class="lead">Selamat Datang</p>
+      <a class="btn btn-lg btn-primary" href="#" role="button">Lihat Pasien &raquo;</a>
+    </div>
+  </main>
+  {% elif session.level == 'Administrasi' %}
+  <main class="container">
+    <div class="bg-light p-5 rounded">
+      <h1>Dashboard Administrasi</h1>
+      <p class="lead">Selamat Datang</p>
+      <a class="btn btn-lg btn-primary" href="#" role="button">Lihat Laporan &raquo;</a>
+    </div>
+  </main>
+  {% endif %}
   {% endblock %}

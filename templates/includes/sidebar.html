@@ -4,6 +4,7 @@ class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
 >
 <div class="position-sticky pt-3">
   <ul class="nav flex-column">
+    {% if session.level == 'Admin' %}
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href="/dashboard">
         <span data-feather="home"></span>
@@ -35,11 +36,56 @@ class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="/users">
         <span data-feather="user-plus"></span>
         Kelola User
       </a>
     </li>
+    {% elif session.level == 'Dokter' %}
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/dashboard">
+        <span data-feather="home"></span>
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <span data-feather="file"></span>
+        Penanganan Pasien
+      </a>
+    </li>
+    {% elif session.level == 'Administrasi'%}
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/dashboard">
+        <span data-feather="home"></span>
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <span data-feather="file"></span>
+        Pendaftaran Pasien
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <span data-feather="shopping-cart"></span>
+        Apotek
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <span data-feather="users"></span>
+        Dokter
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <span data-feather="bar-chart-2"></span>
+        Supplier
+      </a>
+    </li>
+    {% endif %}
   </ul>
 
   <h6
